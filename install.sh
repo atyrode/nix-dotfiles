@@ -62,10 +62,40 @@ if nix run home-manager -- switch --flake ".#alex" 2>&1; then
     echo ""
     echo "✅ Installation complete!"
     echo ""
-    echo "📋 Next steps:"
-    echo "   1. Restart your shell: exec zsh"
-    echo "   2. Or open a new terminal"
-    echo "   3. Run 'atyrode' to see all available tools"
+    
+    # Source Home Manager environment to make zsh available in current session
+    if [[ -f "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh" ]]; then
+        echo "🔄 Loading Home Manager environment..."
+        . "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
+    fi
+    
+    # Try to find zsh in Home Manager profile
+    HM_ZSH=""
+    if [[ -f "$HOME/.nix-profile/bin/zsh" ]]; then
+        HM_ZSH="$HOME/.nix-profile/bin/zsh"
+    elif command -v zsh >/dev/null 2>&1; then
+        HM_ZSH="$(command -v zsh)"
+    fi
+    
+    if [[ -n "$HM_ZSH" ]]; then
+        echo ""
+        echo "📋 Next steps:"
+        echo "   1. Switch to zsh now: exec $HM_ZSH"
+        echo "   2. Or open a new terminal (zsh will be your default shell)"
+        echo "   3. Run 'atyrode' to see all available tools"
+        echo ""
+        echo "💡 Quick switch: exec $HM_ZSH"
+    else
+        echo ""
+        echo "📋 Next steps:"
+        echo "   1. Open a NEW terminal (current session needs to reload)"
+        echo "   2. zsh will be your default shell in new terminals"
+        echo "   3. Run 'atyrode' to see all available tools"
+        echo ""
+        echo "⚠️  Note: The current shell session needs to be restarted."
+        echo "   Run: source ~/.nix-profile/etc/profile.d/hm-session-vars.sh"
+        echo "   Then: exec ~/.nix-profile/bin/zsh"
+    fi
 else
     echo ""
     echo "❌ Installation failed. Common fixes:"
