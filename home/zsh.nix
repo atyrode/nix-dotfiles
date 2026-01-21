@@ -18,8 +18,18 @@
       ];
     };
 
-    # Load custom shell functions
-    initContent = builtins.readFile ./shell/functions.zsh;
+    # Load custom shell functions (in order)
+    initContent = ''
+      # Load shell configuration modules
+      source ${./shell/colors.zsh}
+      source ${./shell/utils.zsh}
+      source ${./shell/aliases.zsh}
+      source ${./shell/python.zsh}
+      source ${./shell/git.zsh}
+      source ${./shell/nix.zsh}
+      source ${./shell/tmux.zsh}
+      source ${./shell/startup.zsh}
+    '';
   };
   
   home.sessionVariables.SHELL = "${pkgs.zsh}/bin/zsh";
