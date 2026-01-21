@@ -1,1 +1,26 @@
+# Python
 .venv
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Nix
+result
+result-*
+.direnv/
+*.swp
+*.swo
+*~
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
