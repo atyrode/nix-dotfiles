@@ -12,7 +12,7 @@
     # System monitoring
     btop
     dua
-    neofetch
+    fastfetch
 
     # Python tooling
     python3
