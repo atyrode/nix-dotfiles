@@ -2,4 +2,4 @@
 # Startup footer
 ############################################
 
-neofetch
+fastfetch
