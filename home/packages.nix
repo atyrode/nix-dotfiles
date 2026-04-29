@@ -32,5 +32,6 @@
     tmux
     rustup
     codex
+    bubblewrap
   ];
 }
