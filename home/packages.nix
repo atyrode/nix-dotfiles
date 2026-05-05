@@ -29,6 +29,7 @@
 
     # Development tools
     git
+    gh
     tmux
     rustup
     codex
